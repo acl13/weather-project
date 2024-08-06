@@ -1,3 +1,16 @@
+document.getElementById("search").addEventListener("click", function () {
+  const userSearch = document.getElementById("search-query").value;
+  console.log(userSearch);
+
+  if (userSearch === "") {
+    alert("Please enter the name of a city");
+  } else {
+    fetchWeatherData(userSearch);
+  }
+
+  userSearch.textContent = "";
+});
+
 const fetchWeatherData = (city) => {
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=a01dd8f2b7b0fd48756b05d7cb1e2fe5`;
 
