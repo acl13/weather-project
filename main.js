@@ -67,9 +67,36 @@ const displayForecast = (data) => {
     `https://openweathermap.org/img/wn/${dayFive.weather[0].icon}@2x.png`;
 };
 
+const displayDays = () => {
+  // Weekdays listed twice to account for overlap
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const date = new Date();
+  document.getElementById("day-one").textContent = days[date.getDay() + 1];
+  document.getElementById("day-two").textContent = days[date.getDay() + 2];
+  document.getElementById("day-three").textContent = days[date.getDay() + 3];
+  document.getElementById("day-four").textContent = days[date.getDay() + 4];
+  document.getElementById("day-five").textContent = days[date.getDay() + 5];
+};
+
 const displayWeatherData = (data) => {
   displayCurrentWeather(data);
   displayForecast(data);
+  displayDays();
 };
 
 const convertKelvinToFahrenheit = (deg) => {
