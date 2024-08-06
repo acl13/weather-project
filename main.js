@@ -19,7 +19,8 @@ const fetchWeatherData = (city) => {
     dataType: "json",
   })
     .then((data) => data.json())
-    .then((data) => displayWeatherData(data));
+    .then((data) => displayWeatherData(data))
+    .catch(handleError);
 };
 
 fetchWeatherData("Charlotte");
@@ -115,3 +116,7 @@ const displayWeatherData = (data) => {
 const convertKelvinToFahrenheit = (deg) => {
   return Math.round((deg - 273) * 1.8 + 32);
 };
+
+function handleError(error) {
+  console.log(`ERROR: ${error}`);
+}
