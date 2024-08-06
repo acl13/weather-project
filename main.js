@@ -6,14 +6,14 @@ const fetchWeatherData = (city) => {
     dataType: "json",
   })
     .then((data) => data.json())
-    .then((data) => displayCurrentData(data));
+    .then((data) => displayCurrentWeather(data));
 };
 
 fetchWeatherData("Charlotte");
 
-const displayCurrentData = (data) => {
+const displayCurrentWeather = (data) => {
   console.log(data);
-  const fahrenheitTemp = Math.round((data.list[0].main.temp - 273) * 1.8 + 32);
+  const fahrenheitTemp = convertKelvinToFahrenheit(data.list[0].main.temp);
   const iconURL = `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`;
 
   document.getElementById("current-temp").textContent =
@@ -22,4 +22,10 @@ const displayCurrentData = (data) => {
   document.getElementById("current-condition").textContent =
     data.list[0].weather[0].main;
   document.getElementById("current-icon").src = iconURL;
+};
+
+const displayForecast = (data) => {};
+
+const convertKelvinToFahrenheit = (deg) => {
+  return Math.round((deg - 273) * 1.8 + 32);
 };
