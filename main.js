@@ -13,13 +13,20 @@ document.getElementById("search").addEventListener("click", function () {
 
 const fetchWeatherData = (city) => {
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=a01dd8f2b7b0fd48756b05d7cb1e2fe5`;
-
+  const searchButton = document.getElementById("search");
+  searchButton.disabled = true;
+  searchButton.innerHTML = `<i class="fa fa-spinner fa-spin"></i>Loading
+`;
   fetch(url, {
     method: "GET",
     dataType: "json",
   })
     .then((data) => data.json())
-    .then((data) => displayWeatherData(data))
+    .then((data) => {
+      displayWeatherData(data);
+      searchButton.disabled = false;
+      searchButton.innerHTML = "Search";
+    })
     .catch(handleError);
 };
 
